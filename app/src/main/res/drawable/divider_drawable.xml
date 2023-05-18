@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="1dp" /> <!-- Adjust the height of the divider as needed -->
+    <solid android:color="@color/grey" /> <!-- Replace with your desired color -->
+</shape>

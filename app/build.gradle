@@ -1,0 +1,156 @@
+
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+
+}
+
+android {
+
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.catnews"
+        minSdk 23
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["dagger.formatGeneratedSource": "disabled"]
+            }
+        }
+    }
+
+
+    sourceSets {
+        main {
+            res.srcDirs = ['src/main/res']
+        }
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "environment"
+    productFlavors {
+        mock {
+        }
+        production {
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
+
+    namespace 'com.example.catnews'
+
+}
+
+ext {
+    daggerVersion = '2.46.1'
+    recyclerViewVersion = '1.3.0'
+    androidXVersion = '2.4.1'
+    appCompatVersion = '1.6.1'
+    constraintVersion ='2.1.4'
+    retrofitVersion = '2.9.0'
+    glideVersion ='4.12.0'
+    coroutinesVersion = '1.6.4'
+    androidArchTestVersion = '2.1.0'
+    materialVersion ="1.5.0"
+    navVersion = "2.4.1"
+    junitVersion = '4.13.2'
+    androidXTestExtVersion = '1.1.3'
+    androidXTestRunnerVersion = '1.1.3'
+    mockkVersion='1.9.3'
+    androidXTestCoreVersion = '1.4.0'
+    jUnitJupiterVersion = '5.7.1'
+    espressoVersion = '3.4.0'
+}
+
+dependencies {
+
+    // Android dependencies
+    implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidXVersion"
+    implementation "androidx.lifecycle:lifecycle-common:$androidXVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime:$androidXVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$androidXVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+
+
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.11.0'
+
+
+    // dagger
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    testImplementation 'junit:junit:4.12'
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
+    // navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+
+    // Test dependencies
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "androidx.arch.core:core-testing:$androidArchTestVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidXTestExtVersion"
+    androidTestImplementation "androidx.test:runner:$androidXTestRunnerVersion"
+    testImplementation "io.mockk:mockk:$mockkVersion"
+    testImplementation "androidx.test:core:$androidXTestCoreVersion"
+
+    testImplementation "io.mockk:mockk-agent-jvm:$mockkVersion"
+    testImplementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: '1.5.30'
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$jUnitJupiterVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jUnitJupiterVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$jUnitJupiterVersion"
+    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:$jUnitJupiterVersion"
+
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+
+}
